@@ -11,4 +11,5 @@ public class FirebaseKeys {
     public final static String KAY_MATCHES  = "matches";
     public final static String KAY_PLAYERS  = "Players";
     public final static String KAY_MESSAGES = "Messages";
+    public final static String KAY_NOTIFY   = "Notify";
 }

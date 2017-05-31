@@ -114,7 +114,7 @@ public class MatchPlayerRecyclerAdapter extends RecyclerView.Adapter<RecyclerVie
             holder.userMessage.setVisibility(View.VISIBLE);
             if(this.itemList.get(position).timestamp > 0) {
                 holder.timestamp.setTextColor(ResourcesCompat.getColor(context.getResources(), R.color.selection_hidden, null));
-                holder.timestamp.setText("Selected @ " + DateUtil.getFormattedDate(this.itemList.get(position).timestamp));
+                holder.timestamp.setText("Selected - " + DateUtil.getFormattedDate(this.itemList.get(position).timestamp));
             } else {
                 holder.timestamp.setTextColor(ResourcesCompat.getColor(context.getResources(), R.color.selection_waiting, null));
                 holder.timestamp.setText("Waiting!");

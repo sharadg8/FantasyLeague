@@ -2,6 +2,7 @@ package com.fantasy.league.fantasyleague.fcm;
 
 import android.util.Log;
 
+import com.fantasy.league.fantasyleague.util.FirebaseKeys;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
@@ -22,7 +23,7 @@ public class InstanceIdService extends FirebaseInstanceIdService {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null) {
             FirebaseDatabase.getInstance().getReference()
-                    .child("users")
+                    .child(FirebaseKeys.KAY_USERS)
                     .child(firebaseUser.getUid())
                     .child("instanceId")
                     .setValue(instanceId);

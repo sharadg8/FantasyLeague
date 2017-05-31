@@ -13,7 +13,6 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import com.fantasy.league.fantasyleague.adapter.ChatRecyclerAdapter;
-import com.fantasy.league.fantasyleague.adapter.EndlessRecyclerOnScrollListener;
 import com.fantasy.league.fantasyleague.storage.FbMessage;
 import com.fantasy.league.fantasyleague.storage.Message;
 import com.fantasy.league.fantasyleague.util.FirebaseKeys;
@@ -47,6 +46,8 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
         mSendButton = (ImageButton) findViewById(R.id.chat_send);
         mMessageText = (EditText) findViewById(R.id.chat_text);
 
@@ -78,7 +79,9 @@ public class ChatActivity extends AppCompatActivity {
                     message.sid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
                     String mid = ""+cal.getTimeInMillis();
-                    FirebaseDatabase.getInstance().getReference().child(FirebaseKeys.KAY_MESSAGES).child(mid).setValue(message);
+
+                    //mDatabase.child(FirebaseKeys.KAY_NOTIFY).child(FirebaseKeys.KAY_MESSAGES).push().setValue(message);
+                    mDatabase.child(FirebaseKeys.KAY_MESSAGES).child(mid).setValue(message);
                     mMessageText.setText("");
                 }
             }
