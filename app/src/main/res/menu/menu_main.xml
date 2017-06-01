@@ -2,14 +2,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.echessa.todo.MainActivity">
-    <!--
+
+    <item
+        android:id="@+id/action_calculate"
+        android:orderInCategory="2"
+        android:icon="@drawable/ic_assignment_black_24dp"
+        android:title="Calculate"
+        app:showAsAction="always"/>
+<!--
     <item
         android:id="@+id/action_standings"
         android:orderInCategory="1"
         android:icon="@drawable/ic_assessment_black_24dp"
         android:title="Standings"
         app:showAsAction="always"/>
-        -->
+-->
     <item
         android:id="@+id/action_about"
         android:orderInCategory="100"

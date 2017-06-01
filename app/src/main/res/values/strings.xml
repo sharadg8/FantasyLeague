@@ -2,6 +2,8 @@
     <string name="app_name">Fantasy League</string>
 
     <string name="title_activity_sign_in">Fantasy League</string>
+    <string name="title_activity_standings">Standings</string>
+    <string name="title_activity_calculate">Points Calculator</string>
     <string name="title_activity_chat">Fantasy Chat</string>
 
     <string name="signed_in_fmt">Signed in as: %s</string>

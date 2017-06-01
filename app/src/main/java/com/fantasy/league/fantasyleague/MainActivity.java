@@ -171,10 +171,13 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
-        // change color for icon 0
-        /*Drawable drawable = menu.getItem(0).getIcon(); // change 0 with 1,2 ...
-        drawable.mutate();
-        drawable.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);*/
+        for(int i=0; i<menu.size(); i++){
+            Drawable drawable = menu.getItem(i).getIcon();
+            if(drawable != null) {
+                drawable.mutate();
+                drawable.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+            }
+        }
 
         return true;
     }
@@ -186,6 +189,9 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         switch(id) {
+            case R.id.action_calculate:
+                startActivity(new Intent(MainActivity.this, CalculateActivity.class));
+                break;
             /*case R.id.action_standings:
                 startActivity(new Intent(MainActivity.this, StandingsActivity.class));
                 break;*/
