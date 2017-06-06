@@ -14,7 +14,7 @@
             android:id="@+id/calc_total"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="1234"
+            android:hint="0"
             android:textSize="40sp"
             android:paddingBottom="8dp"
             android:textAlignment="center"/>

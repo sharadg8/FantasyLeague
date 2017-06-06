@@ -68,95 +68,95 @@ public class MainActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        {
-            setContentView(R.layout.activity_main);
-            mSpinner = (ProgressBar)findViewById(R.id.progressBar);
-            mFab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
-            mUserId = mFirebaseUser.getUid();
+        setContentView(R.layout.activity_main);
+        mSpinner = (ProgressBar)findViewById(R.id.progressBar);
+        mFab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        mUserId = mFirebaseUser.getUid();
 
-            final UserUtil users = new UserUtil(getApplicationContext());
-            FirebaseDatabase.getInstance().getReference().child(FirebaseKeys.KAY_USERS)
-                    .addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            users.clear();
-                            for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                                User user = dsp.getValue(User.class);
-                                users.add(user.uid, user);
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-
-            mFab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(MainActivity.this, ChatActivity.class);
-                    startActivity(intent);
-                }
-            });
-
-            RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            final MatchRecyclerAdapter recyclerAdapter = new MatchRecyclerAdapter();
-            recyclerView.setAdapter(recyclerAdapter);
-            recyclerView.addOnItemTouchListener(
-                    new RecyclerItemClickListener(MainActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(View view, int position) {
-                            Intent intent = new Intent(MainActivity.this, MatchActivity.class);
-                            intent.putExtra(MatchActivity.KEY_MATCH_ID, recyclerAdapter.get(position).getKey());
-
-                            startActivity(intent);
-                        }
-                    })
-            );
-
-            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                @Override
-                public void onScrolled(RecyclerView recyclerView, int dx,int dy){
-                    super.onScrolled(recyclerView, dx, dy);
-
-                    if (dy > 0) {
-                        // Scroll Down
-                        if (mFab.isShown()) {
-                            mFab.hide();
+        final UserUtil users = new UserUtil(getApplicationContext());
+        FirebaseDatabase.getInstance().getReference().child(FirebaseKeys.KAY_USERS)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        users.clear();
+                        for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                            User user = dsp.getValue(User.class);
+                            users.add(user.uid, user);
                         }
                     }
-                    else if (dy < 0) {
-                        // Scroll Up
-                        if (!mFab.isShown()) {
-                            mFab.show();
-                        }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        final MatchRecyclerAdapter recyclerAdapter = new MatchRecyclerAdapter();
+        recyclerView.setAdapter(recyclerAdapter);
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(MainActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Intent intent = new Intent(MainActivity.this, MatchActivity.class);
+                        intent.putExtra(MatchActivity.KEY_MATCH_ID, recyclerAdapter.get(position).getKey());
+
+                        startActivity(intent);
+                    }
+                })
+        );
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx,int dy){
+                super.onScrolled(recyclerView, dx, dy);
+
+                if (dy > 0) {
+                    // Scroll Down
+                    if (mFab.isShown()) {
+                        mFab.hide();
                     }
                 }
-            });
+                else if (dy < 0) {
+                    // Scroll Up
+                    if (!mFab.isShown()) {
+                        mFab.show();
+                    }
+                }
+            }
+        });
 
-            // Use Firebase to populate the list.
-            mDatabase.child(FirebaseKeys.KAY_MATCHES).child("Champions-Trophy").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    mSpinner.setVisibility(View.GONE);
-                    recyclerAdapter.clear();
+        // Use Firebase to populate the list.
+        mDatabase.child(FirebaseKeys.KAY_MATCHES).child("Champions-Trophy").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mSpinner.setVisibility(View.GONE);
+                recyclerAdapter.clear();
+                recyclerAdapter.notifyDataSetChanged();
+                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                    Match match = dsp.getValue(Match.class);
+                    match.setKey(dsp.getKey());
+                    recyclerAdapter.add(match);
                     recyclerAdapter.notifyDataSetChanged();
-                    for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                        Match match = dsp.getValue(Match.class);
-                        match.setKey(dsp.getKey());
-                        recyclerAdapter.add(match);
-                        recyclerAdapter.notifyDataSetChanged();
-                    }
                 }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+                recyclerView.scrollToPosition(recyclerAdapter.getDefaultScrollTo());
+            }
 
-                }
-            });
-        }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void loadLogInView() {

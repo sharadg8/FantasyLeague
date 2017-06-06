@@ -14,10 +14,17 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.fantasy.league.fantasyleague.storage.Match;
+
 public class CalculateActivity extends AppCompatActivity {
     Batting mBatting;
     Bowling mBowling;
     Other mOther;
+
+    TextView mTotalPoints;
+    int battingPoints = 0;
+    int bowlingPoints = 0;
+    int otherPoints = 0;
 
     public class Batting {
         EditText etRuns;
@@ -33,14 +40,6 @@ public class CalculateActivity extends AppCompatActivity {
 
         public Batting() {
             final View grpBatting = findViewById(R.id.calc_batting_group);
-            ((CheckBox) findViewById(R.id.calc_check_bat)).setOnCheckedChangeListener(
-                    new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                            grpBatting.setVisibility(b ? View.VISIBLE : View.GONE);
-                            enable = b;
-                        }
-                    });
 
             focusListener = new View.OnFocusChangeListener() {
                 @Override
@@ -61,17 +60,27 @@ public class CalculateActivity extends AppCompatActivity {
             etSR.setEnabled(false);
             textTotal = (TextView) findViewById(R.id.calc_bat_total);
 
+            ((CheckBox) findViewById(R.id.calc_check_bat)).setOnCheckedChangeListener(
+                    new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                            grpBatting.setVisibility(b ? View.VISIBLE : View.GONE);
+                            enable = b;
+                            calculate();
+                        }
+                    });
+
             clear();
         }
 
         public void clear() {
-            total = 0;
             etRuns.setText("");
             etBalls.setText("");
             et4s.setText("");
             et6s.setText("");
             etSR.setText("");
-            textTotal.setText(""+total);
+
+            calculate();
         }
 
         public void calculate() {
@@ -83,10 +92,29 @@ public class CalculateActivity extends AppCompatActivity {
                 float strikeRate = (balls > 0) ? ((float)runs*100 / balls) : 0;
                 etSR.setText(""+strikeRate);
                 total = 0;
+                if(runs > 99) { total += (100 + runs*3);
+                } else if(runs > 74) { total += runs*3;
+                } else if(runs > 49) { total += runs*2;
+                } else { total += runs; }
+
+                if(runs < 25) { total += (runs - 25) * 2; }
+
+                total += (bat4s * 5);
+                total += (bat6s * 10);
+
+                if(balls > 9) { total += (strikeRate * 0.8);
+                } else { total += (strikeRate * 0.4); }
+
+                if(strikeRate < 65) { total += ((strikeRate - 60) * 2); }
+                if((balls>1) && (runs==0)) { total -= 5; }
+                if((balls==1) && (runs==0)) { total -= 30; }
+                if((balls==0) && (runs==0)) { total -= 55; }
             } else {
                 total = 0;
             }
             textTotal.setText(""+total);
+            battingPoints = total;
+            mTotalPoints.setText(""+(battingPoints+bowlingPoints+otherPoints));
         }
     }
 
@@ -115,6 +143,7 @@ public class CalculateActivity extends AppCompatActivity {
                         public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                             layout.setVisibility(b ? View.VISIBLE : View.GONE);
                             enable = b;
+                            calculate();
                         }
                     });
 
@@ -150,7 +179,6 @@ public class CalculateActivity extends AppCompatActivity {
         }
 
         public void clear() {
-            total = 0;
             etOvers.setText("");
             etRuns.setText("");
             etMaidenOver.setText("");
@@ -161,7 +189,8 @@ public class CalculateActivity extends AppCompatActivity {
             et6s.setText("");
             etNoBall.setText("");
             etWideBall.setText("");
-            textTotal.setText(""+total);
+
+            calculate();
         }
 
         public void calculate() {
@@ -177,17 +206,50 @@ public class CalculateActivity extends AppCompatActivity {
                 int wideBall = (etWideBall.getText().length() > 0) ? Integer.parseInt(etWideBall.getText().toString()) : 0;
                 float economyRate = (overs > 0) ? ((float)runs / overs) : 0;
                 etEconomyRate.setText(""+economyRate);
+                int balls = (int) (Math.floor(overs) * 6);
+                balls += ((overs - Math.floor(overs)) * 10);
                 total = 0;
+
+                total += (balls * 2);
+                total += (maidenOver * 20);
+                total += (ball0s * 2);
+                if(wickets < 3) {
+                    total += (wickets*20);
+                } else if(wickets < 5) {
+                    total += (wickets*40);
+                } else {
+                    total += 100;
+                    total += (wickets*60);
+                }
+
+                total -= (ball4s*10);
+                total -= (ball6s*10);
+                total -= ((noBall+wideBall)*10);
+
+                total += (overs*5);
+
+                if(economyRate <= 6.5) {
+                    total += (50 + (12-economyRate)*overs);
+                } else if(economyRate <= 8) {
+                    total += (6-economyRate)*overs;
+                } else {
+                    total += (0-economyRate)*overs*2;
+                    total -= 100;
+                }
             } else {
                 total = 0;
             }
             textTotal.setText(""+total);
+            bowlingPoints = total;
+            mTotalPoints.setText(""+(battingPoints+bowlingPoints+otherPoints));
         }
     }
 
     public class Other {
         EditText etExtra;
         TextView textTotal;
+        boolean isMOM = false;
+        boolean isNO = false;
 
         public int total = 0;
         boolean  enable = false;
@@ -201,6 +263,25 @@ public class CalculateActivity extends AppCompatActivity {
                         public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                             layout.setVisibility(b ? View.VISIBLE : View.GONE);
                             enable = b;
+                            calculate();
+                        }
+                    });
+
+            ((CheckBox) findViewById(R.id.calc_other_mom)).setOnCheckedChangeListener(
+                    new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                            isMOM = b;
+                            calculate();
+                        }
+                    });
+
+            ((CheckBox) findViewById(R.id.calc_other_no)).setOnCheckedChangeListener(
+                    new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                            isNO = b;
+                            calculate();
                         }
                     });
 
@@ -219,18 +300,25 @@ public class CalculateActivity extends AppCompatActivity {
         }
 
         public void clear() {
-            total = 0;
-            textTotal.setText(""+total);
+            etExtra.setText("");
+
+            calculate();
         }
 
         public void calculate() {
             if(enable) {
                 float extra = (etExtra.getText().length() > 0) ? Float.parseFloat(etExtra.getText().toString()) : 0;
                 total = 0;
+
+                total += extra*20;
+                total += isMOM ? 100 : 0;
+                total += isNO ? 30 : 0;
             } else {
                 total = 0;
             }
             textTotal.setText(""+total);
+            otherPoints = total;
+            mTotalPoints.setText(""+(battingPoints+bowlingPoints+otherPoints));
         }
     }
 
@@ -240,6 +328,7 @@ public class CalculateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calculate);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        mTotalPoints = (TextView) findViewById(R.id.calc_total);
         mBatting = new Batting();
         mBowling = new Bowling();
         mOther = new Other();

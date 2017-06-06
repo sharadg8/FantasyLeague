@@ -33,6 +33,11 @@ public class Match {
         return timeInMillis;
     }
 
+    public boolean isMatchActive() {
+        Calendar now = Calendar.getInstance();
+        return (timeInMillis > (now.getTimeInMillis() + 30*60)) ? true : false;
+    }
+
     public void setKey(String key) {
         this.key = key;
     }

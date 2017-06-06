@@ -1,6 +1,8 @@
 package com.fantasy.league.fantasyleague.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,6 +62,11 @@ public class MatchRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
         holder.date.setText(df.format(cal.getTime()));
         SimpleDateFormat tf = new SimpleDateFormat("hh:mm aa");
         holder.time.setText(tf.format(cal.getTime()));
+        if(itemList.get(position).isMatchActive()) {
+            holder.frame.setCardBackgroundColor(Color.WHITE);
+        } else {
+            holder.frame.setCardBackgroundColor(Color.parseColor("#ECEFF1"));
+        }
     }
 
     @Override
@@ -75,14 +82,27 @@ public class MatchRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
         return this.itemList.get(position);
     }
 
+    public int getDefaultScrollTo() {
+        Calendar lastDay = Calendar.getInstance();
+        lastDay.add(Calendar.DATE, -1);
+        for (int i = 0; i < this.itemList.size(); i++) {
+            if(this.itemList.get(i).getTimeInMillis() > lastDay.getTimeInMillis()) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
     private class MatchViewHolder extends RecyclerView.ViewHolder {
         public TextView between;
         public TextView venue;
         public TextView date;
         public TextView time;
+        public CardView frame;
 
         public MatchViewHolder(View itemView) {
             super(itemView);
+            frame =(CardView) itemView.findViewById(R.id.match_card);
             between = (TextView) itemView.findViewById(R.id.match_between);
             venue = (TextView) itemView.findViewById(R.id.match_venue);
             date = (TextView) itemView.findViewById(R.id.match_date);
