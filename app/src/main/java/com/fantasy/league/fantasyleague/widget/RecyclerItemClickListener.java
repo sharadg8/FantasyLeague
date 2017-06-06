@@ -1,4 +1,4 @@
-package com.fantasy.league.fantasyleague.adapter;
+package com.fantasy.league.fantasyleague.widget;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

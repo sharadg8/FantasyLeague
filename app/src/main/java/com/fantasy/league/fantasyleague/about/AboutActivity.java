@@ -1,22 +1,19 @@
-package com.fantasy.league.fantasyleague;
+package com.fantasy.league.fantasyleague.about;
 
 import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.fantasy.league.fantasyleague.storage.User;
+import com.fantasy.league.fantasyleague.R;
 import com.fantasy.league.fantasyleague.util.FirebaseKeys;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;

@@ -1,4 +1,4 @@
-package com.fantasy.league.fantasyleague;
+package com.fantasy.league.fantasyleague.match;
 
 import android.os.CountDownTimer;
 import android.support.design.widget.Snackbar;
@@ -8,15 +8,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.fantasy.league.fantasyleague.adapter.MatchPlayerRecyclerAdapter;
-import com.fantasy.league.fantasyleague.storage.FbPlayers;
-import com.fantasy.league.fantasyleague.storage.Match;
-import com.fantasy.league.fantasyleague.storage.Players;
-import com.fantasy.league.fantasyleague.storage.User;
+import com.fantasy.league.fantasyleague.R;
+import com.fantasy.league.fantasyleague.main.Match;
+import com.fantasy.league.fantasyleague.util.User;
 import com.fantasy.league.fantasyleague.util.FirebaseKeys;
 import com.fantasy.league.fantasyleague.util.UserUtil;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,8 +27,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.TimeZone;
 
 public class MatchActivity extends AppCompatActivity {

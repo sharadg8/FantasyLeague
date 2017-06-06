@@ -1,4 +1,4 @@
-package com.fantasy.league.fantasyleague;
+package com.fantasy.league.fantasyleague.util;
 
 import android.app.Application;
 import android.text.TextUtils;

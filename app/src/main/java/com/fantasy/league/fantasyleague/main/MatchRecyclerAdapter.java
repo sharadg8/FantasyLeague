@@ -1,4 +1,4 @@
-package com.fantasy.league.fantasyleague.adapter;
+package com.fantasy.league.fantasyleague.main;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.fantasy.league.fantasyleague.storage.Match;
 import com.fantasy.league.fantasyleague.R;
 
 import java.text.SimpleDateFormat;

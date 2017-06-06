@@ -1,4 +1,6 @@
-package com.fantasy.league.fantasyleague.storage;
+package com.fantasy.league.fantasyleague.match;
+
+import com.fantasy.league.fantasyleague.match.FbPlayers;
 
 /**
  * Created by Sharad on 15-May-17.

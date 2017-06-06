@@ -1,4 +1,4 @@
-package com.fantasy.league.fantasyleague.adapter;
+package com.fantasy.league.fantasyleague.match;
 
 import android.content.Context;
 import android.os.CountDownTimer;
@@ -12,10 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.fantasy.league.fantasyleague.R;
-import com.fantasy.league.fantasyleague.storage.Match;
+import com.fantasy.league.fantasyleague.main.Match;
 import com.fantasy.league.fantasyleague.util.DateUtil;
-import com.fantasy.league.fantasyleague.storage.FbPlayers;
-import com.fantasy.league.fantasyleague.storage.Players;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

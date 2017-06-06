@@ -1,4 +1,4 @@
-package com.fantasy.league.fantasyleague.adapter;
+package com.fantasy.league.fantasyleague.chat;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.fantasy.league.fantasyleague.R;
-import com.fantasy.league.fantasyleague.storage.Message;
 
 import java.util.ArrayList;
 import java.util.List;

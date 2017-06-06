@@ -1,4 +1,6 @@
-package com.fantasy.league.fantasyleague.storage;
+package com.fantasy.league.fantasyleague.chat;
+
+import com.fantasy.league.fantasyleague.chat.FbMessage;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -7,7 +9,7 @@ import java.util.Calendar;
  * Created by Sharad on 27-May-17.
  */
 
-public class Message extends FbMessage{
+public class Message extends FbMessage {
     public String name;
     public int    color;
     public long   time;

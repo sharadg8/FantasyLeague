@@ -1,4 +1,4 @@
-package com.fantasy.league.fantasyleague.storage;
+package com.fantasy.league.fantasyleague.util;
 
 /**
  * Created by Sharad on 14-May-17.

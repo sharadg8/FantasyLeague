@@ -1,4 +1,4 @@
-package com.fantasy.league.fantasyleague;
+package com.fantasy.league.fantasyleague.login;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.fantasy.league.fantasyleague.main.MainActivity;
+import com.fantasy.league.fantasyleague.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

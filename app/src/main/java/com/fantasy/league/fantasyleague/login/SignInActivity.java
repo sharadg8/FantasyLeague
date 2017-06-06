@@ -1,4 +1,4 @@
-package com.fantasy.league.fantasyleague;
+package com.fantasy.league.fantasyleague.login;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -7,10 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fantasy.league.fantasyleague.storage.User;
+import com.fantasy.league.fantasyleague.main.MainActivity;
+import com.fantasy.league.fantasyleague.R;
+import com.fantasy.league.fantasyleague.util.User;
 import com.fantasy.league.fantasyleague.util.FirebaseKeys;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -21,7 +22,6 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;

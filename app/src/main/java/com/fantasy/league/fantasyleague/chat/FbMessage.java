@@ -1,4 +1,4 @@
-package com.fantasy.league.fantasyleague.storage;
+package com.fantasy.league.fantasyleague.chat;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

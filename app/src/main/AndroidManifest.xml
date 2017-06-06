@@ -10,14 +10,14 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".AppController"
+        android:name=".util.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashActivity"
+            android:name=".login.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,30 +26,26 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".main.MainActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name=".SignInActivity"
+            android:name=".login.SignInActivity"
             android:label="@string/title_activity_sign_in" />
         <activity
-            android:name=".MatchActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name=".match.MatchActivity"
+            android:parentActivityName=".main.MainActivity" />
         <activity
-            android:name=".StandingsActivity"
-            android:label="@string/title_activity_standings"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".CalculateActivity"
+            android:name=".about.CalculateActivity"
             android:label="@string/title_activity_calculate"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".main.MainActivity"/>
         <activity
-            android:name=".ChatActivity"
+            android:name=".chat.ChatActivity"
             android:label="@string/title_activity_chat"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".main.MainActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name=".AboutActivity"
-            android:parentActivityName=".MainActivity"
+            android:name=".about.AboutActivity"
+            android:parentActivityName=".main.MainActivity"
             android:theme="@style/FullScreenTheme" />
 
         <service

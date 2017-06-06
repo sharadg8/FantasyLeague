@@ -1,6 +1,5 @@
-package com.fantasy.league.fantasyleague;
+package com.fantasy.league.fantasyleague.about;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -14,7 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.fantasy.league.fantasyleague.storage.Match;
+import com.fantasy.league.fantasyleague.R;
 
 public class CalculateActivity extends AppCompatActivity {
     Batting mBatting;

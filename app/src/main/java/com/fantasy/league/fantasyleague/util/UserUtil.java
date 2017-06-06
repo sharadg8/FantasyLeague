@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 
 import com.fantasy.league.fantasyleague.R;
-import com.fantasy.league.fantasyleague.storage.User;
 
 import java.util.HashMap;
 import java.util.regex.Matcher;

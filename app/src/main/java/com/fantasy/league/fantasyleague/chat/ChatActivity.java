@@ -1,4 +1,4 @@
-package com.fantasy.league.fantasyleague;
+package com.fantasy.league.fantasyleague.chat;
 
 import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
@@ -10,11 +10,8 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
 
-import com.fantasy.league.fantasyleague.adapter.ChatRecyclerAdapter;
-import com.fantasy.league.fantasyleague.storage.FbMessage;
-import com.fantasy.league.fantasyleague.storage.Message;
+import com.fantasy.league.fantasyleague.R;
 import com.fantasy.league.fantasyleague.util.FirebaseKeys;
 import com.fantasy.league.fantasyleague.util.UserUtil;
 import com.google.firebase.auth.FirebaseAuth;
